@@ -4,10 +4,10 @@ import BarChart from "../components/BarChart";
 import React from "react";
 
 
-const BarGraph = () => {
+const BarGraphPage = () => {
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Simple Bar Chart" />
+      <Header title="Bar Chart" subtitle="Location wise participation" />
       <Box height="75vh">
         <BarChart />
       </Box>
@@ -15,4 +15,4 @@ const BarGraph = () => {
   );
 };
 
-export default BarGraph;
+export default BarGraphPage;

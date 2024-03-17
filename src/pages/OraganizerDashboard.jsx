@@ -5,6 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import GoLiveIcon from "@mui/icons-material/Send";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -83,6 +84,7 @@ const OrganizerDashboard = () => {
   // State for modal
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const navigate = useNavigate();
 
   const handleViewClick = (event) => {
     setSelectedEvent(event);
@@ -110,6 +112,9 @@ const OrganizerDashboard = () => {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
+            }}
+            onClick={() => {
+              navigate("/organiser/create-event")
             }}
           >
             <AddIcon sx={{ mr: "10px" }} />

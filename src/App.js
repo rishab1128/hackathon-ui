@@ -6,20 +6,24 @@ import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import { useState } from "react";
-import BarGraph from "./pages/BarGraph";
+import BarGraphPage from "./pages/BarGraphPage";
 import React from "react";
+import CreateEventPage from "./pages/CreateEventPage";
+import ViewEventsPage from "./pages/ViewEventsPage";
+import PieChartPage from "./pages/PieChartPage";
+import LineChartPage from "./pages/LineChartPage";
+import CalendarPage from "./pages/CalendarPage";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-        <Sidebar
+          <Sidebar
             isSidebar={isSidebar}
             isOrganizerDashboard={window.location.pathname.startsWith(
               "/organiser"
@@ -33,9 +37,17 @@ function App() {
                 path="/organiser/dashboard"
                 element={<OrganizerDashboard />}
               />
+              <Route path="/organiser/view-bar" element={<BarGraphPage />} />
+              <Route path="/organiser/view-pie" element={<PieChartPage />} />
+              <Route path="/organiser/view-line" element={<LineChartPage />} />
+              <Route path="/organiser/view-calendar" element={<CalendarPage />} />
               <Route
-                path="/organiser/view-bar"
-                element={<BarGraph />}
+                path="/organiser/create-event"
+                element={<CreateEventPage />}
+              />
+              <Route
+                path="/organiser/view-events"
+                element={<ViewEventsPage />}
               />
             </Routes>
           </main>

@@ -173,18 +173,18 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                 />
                 <Item
                   title="Line Chart"
-                  to="/organiser/line"
+                  to="/organiser/view-line"
                   icon={<TimelineOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
-                <Item
+                {/* <Item
                   title="Geography Chart"
                   to="/organiser/geography"
                   icon={<MapOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
-                />
+                /> */}
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
@@ -194,7 +194,7 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                 </Typography>
                 <Item
                   title="Calendar"
-                  to="/organiser/calendar"
+                  to="/organiser/view-calendar"
                   icon={<CalendarTodayOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
