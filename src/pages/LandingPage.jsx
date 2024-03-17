@@ -1,12 +1,24 @@
 import React from "react";
-import { Card, CardContent, Typography, Grid, Container } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  Container,
+  useTheme,
+} from "@mui/material";
 import LeftDrawer from "../components/LeftDrawer";
+import { tokens } from "../theme";
+
 // import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
     <>
-      <LeftDrawer />
+      {/* <LeftDrawer /> */}
       <Container style={{ height: "100vh" }}>
         <Grid
           container

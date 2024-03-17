@@ -1,21 +1,97 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
-import { mockTransactions } from "../data/mockData";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
+import EditIcon from "@mui/icons-material/Edit";
+import GoLiveIcon from "@mui/icons-material/Send";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import React from "react";
+
+import {
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  useTheme
+} from "@mui/material";
+import { useState } from "react";
 import Header from "../components/Header";
 import LineChart from "../components/LineChart";
-import GeographyChart from "../components/GeographyChart";
-import BarChart from "../components/BarChart";
-import StatBox from "../components/StatBox";
-import ProgressCircle from "../components/ProgressCircle";
+import { mockOrganizedEvents } from "../data/mockData";
+import { tokens } from "../theme";
 
 const OrganizerDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // Sample event data
+  const events = [
+    {
+      serialNo: 1,
+      eventId: "E001",
+      name: "Event 1",
+      category: "Sports",
+      date: "2022-10-10",
+      status: "upcoming",
+      type: "In-Person",
+    },
+    {
+      serialNo: 2,
+      eventId: "E002",
+      name: "Event 2",
+      category: "Technical",
+      date: "2022-11-15",
+      status: "upcoming",
+      type: "Virtual",
+    },
+    {
+      serialNo: 3,
+      eventId: "E003",
+      name: "Event 3",
+      category: "Non-Technical",
+      date: "2023-01-20",
+      status: "upcoming",
+      type: "In-Person",
+    },
+    {
+      serialNo: 4,
+      eventId: "E004",
+      name: "Event 4",
+      category: "Cultural",
+      date: "2023-02-25",
+      status: "live",
+      type: "Virtual",
+    },
+    {
+      serialNo: 5,
+      eventId: "E005",
+      name: "Event 5",
+      category: "Sports",
+      date: "2023-03-30",
+      status: "upcoming",
+      type: "In-Person",
+    },
+    // Add more events as needed
+  ];
+
+  // State for modal
+  const [open, setOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const handleViewClick = (event) => {
+    setSelectedEvent(event);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box m="20px">
@@ -36,8 +112,8 @@ const OrganizerDashboard = () => {
               padding: "10px 20px",
             }}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
+            <AddIcon sx={{ mr: "10px" }} />
+            Create Event
           </Button>
         </Box>
       </Box>
@@ -49,85 +125,7 @@ const OrganizerDashboard = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={
-              <EmailIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
-            progress="0.50"
-            increase="+21%"
-            icon={
-              <PointOfSaleIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="32,441"
-            subtitle="New Clients"
-            progress="0.30"
-            increase="+5%"
-            icon={
-              <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
-            progress="0.80"
-            increase="+43%"
-            icon={
-              <TrafficIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-
-        {/* ROW 2 */}
+        {/* Line Chart*/}
         <Box
           gridColumn="span 8"
           gridRow="span 2"
@@ -146,14 +144,14 @@ const OrganizerDashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                Events Organised
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                156
               </Typography>
             </Box>
             <Box>
@@ -168,6 +166,8 @@ const OrganizerDashboard = () => {
             <LineChart isOrganizerDashboard={true} />
           </Box>
         </Box>
+
+        {/* Recent Events Organized */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
@@ -183,12 +183,12 @@ const OrganizerDashboard = () => {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Recent Events Organized
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {mockOrganizedEvents.map((events, i) => (
             <Box
-              key={`${transaction.txId}-${i}`}
+              key={`${events.name}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -201,85 +201,164 @@ const OrganizerDashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {events.name}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
+              <Box color={colors.grey[100]}>{events.date}</Box>
             </Box>
           ))}
         </Box>
-
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isOrganizerDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isOrganizerDashboard={true} />
-          </Box>
-        </Box>
       </Box>
+
+      {/* Events table */}
+      <Box mt="20px" width="100%" overflowX="auto">
+        <TableContainer>
+          <Table sx={{ minWidth: 650 }} border={1}>
+            <TableHead>
+              <TableRow>
+                <TableCell colSpan={8}>
+                  <Typography variant="h3" fontWeight="600">
+                    Upcoming Events
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Serial No
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Event ID
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Name
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Category
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Date
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Status
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Type
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="h4" fontWeight="600">
+                    Actions
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {events.map((event, index) => (
+                <TableRow key={index}>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.serialNo}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.eventId}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.name}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.category}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.date}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.status}</Typography></TableCell>
+                  <TableCell><Typography variant="h5" fontWeight="600">{event.type}</Typography></TableCell>
+                  <TableCell>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewClick(event);
+                      }}
+                    >
+                      <VisibilityIcon />
+                    </IconButton>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Add logic for edit action here
+                      }}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Add logic for delete action here
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                    {event.status !== "live" ? (
+                      <IconButton disabled>
+                        <GoLiveIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Add logic for go live action here
+                        }}
+                      >
+                        <GoLiveIcon />
+                      </IconButton>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+
+      {/* Event Details Modal */}
+
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            backgroundColor: "#fff",
+            boxShadow: 14,
+            padding: 3,
+            borderRadius: 4,
+            margin: "auto",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+          }}
+        >
+          <Typography variant="body1" color="black">
+            {selectedEvent?.eventId}
+          </Typography>
+          <Typography variant="h4" gutterBottom color="black">
+            {selectedEvent?.name}
+          </Typography>
+          <Typography variant="body1" color="black">
+            {selectedEvent?.date}
+          </Typography>
+          <Typography variant="body1" color="black">
+            {selectedEvent?.category}
+          </Typography>
+          <Typography variant="body1" color="black">
+            {selectedEvent?.type}
+          </Typography>
+          <Typography variant="body1" color="black">
+            {selectedEvent?.status}
+          </Typography>
+        </Box>
+      </Modal>
     </Box>
   );
 };
