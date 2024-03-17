@@ -1,19 +1,20 @@
-import AddIcon from "@mui/icons-material/Add";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Link } from "react-router-dom";
 import { tokens } from "../theme";
-import { useState } from "react";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import userLogo from "../assets/user.png";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -34,7 +35,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
+const Sidebar = ({ currentPage }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -62,10 +63,44 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
+          {/* Sidebar content based on the current page */}
+          {currentPage === "LandingPage" && (
+            <>
+              <MenuItem
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+                style={{
+                  margin: "10px 0 20px 0",
+                  color: colors.grey[100],
+                }}
+              >
+                {!isCollapsed && (
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    ml="15px"
+                  >
+                    <Typography variant="h3" color={colors.grey[100]}>
+                      EMS WEB APP
+                    </Typography>
+                    <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                      <MenuOutlinedIcon />
+                    </IconButton>
+                  </Box>
+                )}
+              </MenuItem>
+              <Item
+                title="Dashboard"
+                to="/"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </>
+          )}
 
-          {/* Sidebar content based on the page */}
-          {isOrganizerDashboard ? (
+          {currentPage === "OrganiserDashboard" && (
             <>
               <MenuItem
                 onClick={() => setIsCollapsed(!isCollapsed)}
@@ -178,13 +213,6 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                {/* <Item
-                  title="Geography Chart"
-                  to="/organiser/geography"
-                  icon={<MapOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                /> */}
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
@@ -201,7 +229,9 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                 />
               </Box>
             </>
-          ) : (
+          )}
+
+          {currentPage === "AdminDashboard" && (
             <>
               <MenuItem
                 onClick={() => setIsCollapsed(!isCollapsed)}
@@ -219,7 +249,7 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                     ml="15px"
                   >
                     <Typography variant="h3" color={colors.grey[100]}>
-                      EMS WEB APP
+                      ADMIN
                     </Typography>
                     <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                       <MenuOutlinedIcon />
@@ -227,15 +257,121 @@ const Sidebar = ({ isSidebar, isOrganizerDashboard }) => {
                   </Box>
                 )}
               </MenuItem>
-              <Item
-                title="Dashboard"
-                to="/"
-                icon={<HomeOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
+              {!isCollapsed && (
+                <Box mb="25px">
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <img
+                      alt="profile-user"
+                      width="100px"
+                      height="100px"
+                      src={userLogo}
+                      style={{ cursor: "pointer", borderRadius: "50%" }}
+                    />
+                  </Box>
+                  <Box textAlign="center">
+                    <Typography
+                      variant="h2"
+                      color={colors.grey[100]}
+                      fontWeight="bold"
+                      sx={{ m: "10px 0 0 0" }}
+                    >
+                      ADMIN 1
+                    </Typography>
+                    <Typography variant="h5" color={colors.greenAccent[500]}>
+                      WF SR. ADMIN
+                    </Typography>
+                  </Box>
+                </Box>
+              )}
+              <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+                <Item
+                  title="Dashboard"
+                  to="/admin/dashboard"
+                  icon={<HomeOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Typography
+                  variant="h6"
+                  color={colors.grey[300]}
+                  sx={{ m: "15px 0 5px 20px" }}
+                >
+                  Actions
+                </Typography>
+                <Item
+                  title="View All Events"
+                  to="/admin/all-events"
+                  icon={<VisibilityIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="View Pending Events"
+                  to="/admin/pending-events"
+                  icon={<PendingActionsIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Organisers Info"
+                  to="admin/organisers-info"
+                  icon={<ContactsOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Typography
+                  variant="h6"
+                  color={colors.grey[300]}
+                  sx={{ m: "15px 0 5px 20px" }}
+                >
+                  Reports & Stats
+                </Typography>
+                <Item
+                  title="Bar Chart"
+                  to="/admin/view-bar"
+                  icon={<BarChartOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Pie Chart"
+                  to="/admin/view-pie"
+                  icon={<PieChartOutlineOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Line Chart"
+                  to="/admin/view-line"
+                  icon={<TimelineOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Typography
+                  variant="h6"
+                  color={colors.grey[300]}
+                  sx={{ m: "15px 0 5px 20px" }}
+                >
+                  Schedule
+                </Typography>
+                <Item
+                  title="Calendar"
+                  to="/admin/view-calendar"
+                  icon={<CalendarTodayOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </Box>
             </>
           )}
+
+          {/* {currentPage === "UserDashboard" && (
+            // Render User Dashboard content
+          )} */}
         </Menu>
       </ProSidebar>
     </Box>
