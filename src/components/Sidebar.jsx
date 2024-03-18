@@ -421,7 +421,7 @@ const Sidebar = ({ currentPage }) => {
                       fontWeight="bold"
                       sx={{ m: "10px 0 0 0" }}
                     >
-                      UTKARSH
+                      Rishab
                     </Typography>
                     <Typography variant="h5" color={colors.greenAccent[500]}>
                       WF USER

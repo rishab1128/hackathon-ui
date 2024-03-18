@@ -25,6 +25,8 @@ import OrganisersInfoPage from "./pages/OrganisersInfoPage";
 import UserDashboard from "./pages/UserDashboard";
 import ViewUpcomingEvents from "./pages/ViewUpcomingEvents";
 import ViewRegisteredEvents from "./pages/ViewRegisteredEvents";
+import AdminViewAllEvents from "./pages/AdminViewAllEvents";
+import LoginPage from "./pages/LoginPage";
 // import LandingPage2 from "./pages/LandingPage2";
 
 function App() {

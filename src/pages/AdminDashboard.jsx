@@ -17,19 +17,6 @@ const AdminDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const location = useLocation();
-  const { parentBaseRoute } = location.state;
-
-  console.log(parentBaseRoute);
-
-  // useEffect(() => {
-  //   const baseRoute = location.pathname.split("/")[1]; // Extract base route
-  //   console.log(baseRoute);
-  //   if (parentBaseRoute && parentBaseRoute !== baseRoute) {
-  //     // window.location.reload();
-  //   }
-  // }, [location]);
-
   const columns = [
     { field: "id", headerName: "Serial No.", flex: 0.5 },
     { field: "eventId", headerName: "Event ID", flex: 1 },
