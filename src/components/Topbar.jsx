@@ -46,7 +46,11 @@ const Topbar = ({ currentPage }) => {
               <IconButton>
                 <SettingsOutlinedIcon />
               </IconButton>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
                 <PersonOutlinedIcon />
               </IconButton>
             </Box>

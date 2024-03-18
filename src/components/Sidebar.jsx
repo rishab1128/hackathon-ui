@@ -66,7 +66,7 @@ const Sidebar = ({ currentPage }) => {
           {/* Sidebar content based on the current page */}
           {currentPage === "LandingPage" && (
             <>
-              <MenuItem
+              {/* <MenuItem
                 onClick={() => setIsCollapsed(!isCollapsed)}
                 icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
                 style={{
@@ -96,7 +96,7 @@ const Sidebar = ({ currentPage }) => {
                 icon={<HomeOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
             </>
           )}
 

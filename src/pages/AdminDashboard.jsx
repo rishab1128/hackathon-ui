@@ -1,24 +1,34 @@
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import EventIcon from "@mui/icons-material/Event";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../components/Header";
 import StatBox from "../components/StatBox";
 import { tokens } from "../theme";
-import { mockAdminAllEvents  as events } from "../data/mockData";
+import { mockAdminAllEvents as events } from "../data/mockData";
 
 const AdminDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // Sample event data
-  
+  const location = useLocation();
+  const { parentBaseRoute } = location.state;
+
+  console.log(parentBaseRoute);
+
+  // useEffect(() => {
+  //   const baseRoute = location.pathname.split("/")[1]; // Extract base route
+  //   console.log(baseRoute);
+  //   if (parentBaseRoute && parentBaseRoute !== baseRoute) {
+  //     // window.location.reload();
+  //   }
+  // }, [location]);
 
   const columns = [
     { field: "id", headerName: "Serial No.", flex: 0.5 },

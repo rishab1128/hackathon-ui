@@ -17,6 +17,7 @@ import CalendarPage from "./pages/CalendarPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import PendingEventsPage from "./pages/PendingEventsPage";
 import OrganisersInfoPage from "./pages/OrganisersInfoPage";
+import LoginPage from "./pages/LoginPage";
 // import LandingPage2 from "./pages/LandingPage2";
 
 function App() {
@@ -42,7 +43,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          
           {getCurrentPage() !== "LandingPage" && (
             <Sidebar
               isSidebar={isSidebar}
@@ -57,6 +57,11 @@ function App() {
             />
             <Routes>
               <Route path="*" element={<LandingPage />} />
+
+              {/* LOGIN */}
+              <Route path="/login/user" element={<LoginPage />} />
+              <Route path="/login/admin" element={<LoginPage />} />
+              <Route path="/login/organiser" element={<LoginPage />} />
 
               {/* ORGANISER */}
               <Route
