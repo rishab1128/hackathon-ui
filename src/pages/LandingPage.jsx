@@ -1,16 +1,11 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Container,
-  useTheme,
-} from "@mui/material";
-import LeftDrawer from "../components/LeftDrawer";
+import { Box, useTheme, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { ReactTyped } from "react-typed";
 import { tokens } from "../theme";
-
-// import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Info from "../components/Info";
+import Hero from "../components/Hero";
+import WfLogo from "../assets/wf-logo.svg";
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -18,53 +13,55 @@ const LandingPage = () => {
 
   return (
     <>
-      {/* <LeftDrawer /> */}
-      <Container style={{ height: "100vh" }}>
-        <Grid
-          container
-          spacing={3}
-          justifyContent="center"
-          alignItems="center"
-          style={{ height: "100%" }}
+      <Box
+        position="absolute"
+        top={0}
+        left={0}
+        p={2}
+        zIndex={9999} // Ensure it appears above other content
+      >
+        <Typography
+          variant="h1"
+          component="div"
+          fontWeight="bold"
+          color="white"
         >
-          <Grid item xs={12} sm={6} md={4}>
-            <Card style={{ height: "100%" }}>
-              <CardContent style={{ height: "100%" }}>
-                <Typography variant="h5" component="div" gutterBottom>
-                  Login as User
-                </Typography>
-                <Typography variant="body2">
-                  Click here to login as a user.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Card style={{ height: "100%" }}>
-              <CardContent style={{ height: "100%" }}>
-                <Typography variant="h5" component="div" gutterBottom>
-                  Login as Organiser
-                </Typography>
-                <Typography variant="body2">
-                  Click here to login as an organiser.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Card style={{ height: "100%" }}>
-              <CardContent style={{ height: "100%" }}>
-                <Typography variant="h5" component="div" gutterBottom>
-                  Login as Admin
-                </Typography>
-                <Typography variant="body2">
-                  Click here to login as an admin.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
+          Wells Fargo
+        </Typography>
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+        flexDirection="column" // Center the text vertically
+        style={{
+          backgroundImage: `url(${WfLogo})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <ReactTyped
+          strings={["EVENTS WEB APP"]}
+          typeSpeed={120}
+          backSpeed={140}
+          loop
+          style={{
+            fontSize: "48px", // Adjust the font size as needed
+            fontWeight: "bold", // Make the text bold
+            color: "white", // Set text color to white
+          }}
+        />
+        {/* Faded text */}
+        <Box
+          mt={2}
+          style={{ color: "#ffffff80", fontSize: "24px", textAlign: "center" }}
+        >
+          Event planning and marketing in one place
+        </Box>
+      </Box>
+      <Info />
+      <Footer />
     </>
   );
 };

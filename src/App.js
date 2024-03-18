@@ -17,6 +17,7 @@ import CalendarPage from "./pages/CalendarPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import PendingEventsPage from "./pages/PendingEventsPage";
 import OrganisersInfoPage from "./pages/OrganisersInfoPage";
+// import LandingPage2 from "./pages/LandingPage2";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -41,12 +42,19 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar
-            isSidebar={isSidebar}
-            currentPage={getCurrentPage()} // Pass the currentPage prop
-          />
+          
+          {getCurrentPage() !== "LandingPage" && (
+            <Sidebar
+              isSidebar={isSidebar}
+              currentPage={getCurrentPage()} // Pass the currentPage prop
+            />
+          )}
+
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            <Topbar
+              setIsSidebar={setIsSidebar}
+              currentPage={getCurrentPage()}
+            />
             <Routes>
               <Route path="*" element={<LandingPage />} />
 
