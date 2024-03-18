@@ -9,13 +9,14 @@ import { useState } from "react";
 import BarGraphPage from "./pages/BarGraphPage";
 import React from "react";
 import CreateEventPage from "./pages/CreateEventPage";
+import ViewAllEventsPage from "./pages/ViewAllEventsPage";
 import ViewEventsPage from "./pages/ViewEventsPage";
 import PieChartPage from "./pages/PieChartPage";
 import LineChartPage from "./pages/LineChartPage";
 import CalendarPage from "./pages/CalendarPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import PendingEventsPage from "./pages/PendingEventsPage";
-import OrganisersInfoPage from './pages/OrganisersInfoPage';
+import OrganisersInfoPage from "./pages/OrganisersInfoPage";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -65,10 +66,14 @@ function App() {
                 path="/organiser/create-event"
                 element={<CreateEventPage />}
               />
+              <Route
+                path="/organiser/view-events"
+                element={<ViewEventsPage />}
+              />
 
               {/* ADMIN */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/all-events" element={<ViewEventsPage />} />
+              <Route path="/admin/all-events" element={<ViewAllEventsPage />} />
               <Route
                 path="/admin/pending-events"
                 element={<PendingEventsPage />}
@@ -77,6 +82,9 @@ function App() {
                 path="/admin/organisers-info"
                 element={<OrganisersInfoPage />}
               />
+              <Route path="/admin/view-bar" element={<BarGraphPage />} />
+              <Route path="/admin/view-pie" element={<PieChartPage />} />
+              <Route path="/admin/view-line" element={<LineChartPage />} />
             </Routes>
           </main>
         </div>

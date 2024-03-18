@@ -316,13 +316,6 @@ const Sidebar = ({ currentPage }) => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                <Item
-                  title="Organisers Info"
-                  to="admin/organisers-info"
-                  icon={<ContactsOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}
@@ -356,12 +349,12 @@ const Sidebar = ({ currentPage }) => {
                   color={colors.grey[300]}
                   sx={{ m: "15px 0 5px 20px" }}
                 >
-                  Schedule
+                  Info
                 </Typography>
                 <Item
-                  title="Calendar"
-                  to="/admin/view-calendar"
-                  icon={<CalendarTodayOutlinedIcon />}
+                  title="Organisers Info"
+                  to="admin/organisers-info"
+                  icon={<ContactsOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

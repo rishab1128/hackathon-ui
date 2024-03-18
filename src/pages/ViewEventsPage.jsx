@@ -48,10 +48,7 @@ const ViewEventsPage = () => {
 
   return (
     <Box m="20px">
-      <Header
-        title="EVENTS"
-        subtitle="List of All Events"
-      />
+      <Header title="EVENTS" subtitle="List of All Events" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -61,6 +58,7 @@ const ViewEventsPage = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -68,6 +66,7 @@ const ViewEventsPage = () => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],

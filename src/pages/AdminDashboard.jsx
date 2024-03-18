@@ -6,170 +6,29 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-  Box,
-  Button,
-  useTheme
-} from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../components/Header";
 import StatBox from "../components/StatBox";
 import { tokens } from "../theme";
+import { mockAdminAllEvents  as events } from "../data/mockData";
 
 const AdminDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   // Sample event data
-  const events = [
-    // Existing events
-    {
-      id: 1,
-      eventId: "E001",
-      name: "Event 1",
-      category: "Sports",
-      date: "2022-10-10",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    // Add 15 more events
-    {
-      id: 2,
-      eventId: "E002",
-      name: "Event 2",
-      category: "Technical",
-      date: "2022-11-15",
-      status: "upcoming",
-      type: "Virtual",
-    },
-    {
-      id: 3,
-      eventId: "E003",
-      name: "Event 3",
-      category: "Non-Technical",
-      date: "2023-01-20",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    {
-      id: 4,
-      eventId: "E004",
-      name: "Event 4",
-      category: "Cultural",
-      date: "2023-02-25",
-      status: "live",
-      type: "Virtual",
-    },
-    {
-      id: 5,
-      eventId: "E005",
-      name: "Event 5",
-      category: "Sports",
-      date: "2023-03-30",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    // Add more events as needed
-    {
-      id: 6,
-      eventId: "E006",
-      name: "Event 6",
-      category: "Technical",
-      date: "2023-04-10",
-      status: "upcoming",
-      type: "Virtual",
-    },
-    {
-      id: 7,
-      eventId: "E007",
-      name: "Event 7",
-      category: "Sports",
-      date: "2023-05-15",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    {
-      id: 8,
-      eventId: "E008",
-      name: "Event 8",
-      category: "Cultural",
-      date: "2023-06-20",
-      status: "upcoming",
-      type: "Virtual",
-    },
-    {
-      id: 9,
-      eventId: "E009",
-      name: "Event 9",
-      category: "Non-Technical",
-      date: "2023-07-25",
-      status: "live",
-      type: "In-Person",
-    },
-    {
-      id: 10,
-      eventId: "E010",
-      name: "Event 10",
-      category: "Sports",
-      date: "2023-08-30",
-      status: "upcoming",
-      type: "Virtual",
-    },
-    {
-      id: 11,
-      eventId: "E011",
-      name: "Event 11",
-      category: "Technical",
-      date: "2023-09-05",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    {
-      id: 12,
-      eventId: "E012",
-      name: "Event 12",
-      category: "Cultural",
-      date: "2023-10-10",
-      status: "upcoming",
-      type: "Virtual",
-    },
-    {
-      id: 13,
-      eventId: "E013",
-      name: "Event 13",
-      category: "Non-Technical",
-      date: "2023-11-15",
-      status: "upcoming",
-      type: "In-Person",
-    },
-    {
-      id: 14,
-      eventId: "E014",
-      name: "Event 14",
-      category: "Sports",
-      date: "2023-12-20",
-      status: "Past",
-      type: "Virtual",
-    },
-    {
-      id: 15,
-      eventId: "E015",
-      name: "Event 15",
-      category: "Technical",
-      date: "2024-01-25",
-      status: "Past",
-      type: "In-Person",
-    },
-  ];
+  
 
   const columns = [
     { field: "id", headerName: "Serial No.", flex: 0.5 },
     { field: "eventId", headerName: "Event ID", flex: 1 },
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "name", headerName: "Event Name", flex: 1 },
     { field: "category", headerName: "Category", flex: 1 },
     { field: "date", headerName: "Date", flex: 1 },
     { field: "status", headerName: "Status", flex: 1 },
     { field: "type", headerName: "Type", flex: 1 },
+    { field: "organizedBy", headerName: "Organised By", flex: 1 },
   ];
 
   const navigate = useNavigate();
@@ -296,7 +155,7 @@ const AdminDashboard = () => {
             },
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
-              fontSize: "16px"
+              fontSize: "16px",
             },
             "& .name-column--cell": {
               color: colors.greenAccent[300],
@@ -304,7 +163,7 @@ const AdminDashboard = () => {
             "& .MuiDataGrid-columnHeaders": {
               backgroundColor: colors.blueAccent[700],
               borderBottom: "none",
-              fontSize: "16px"
+              fontSize: "16px",
             },
             "& .MuiDataGrid-virtualScroller": {
               backgroundColor: colors.primary[400],
@@ -324,8 +183,8 @@ const AdminDashboard = () => {
           <DataGrid
             rows={events}
             columns={columns}
-            // pageSize={10}
-            rowsPerPageOptions={[10, 20, 30, 40]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
           />
         </Box>
       </Box>
