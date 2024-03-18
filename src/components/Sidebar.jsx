@@ -1,8 +1,8 @@
 import { Box, Typography, useTheme, IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../theme";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -40,6 +40,17 @@ const Sidebar = ({ currentPage }) => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.includes("/user/all-events")) {
+      setSelected("View All Events");
+    } else if (location.pathname.includes("/user/upcoming-events")) {
+      setSelected("View Upcoming Events");
+    } else if (location.pathname.includes("/user/registered-events")) {
+      setSelected("View Registered Events");
+    }
+  }, [location.pathname]);
 
   return (
     <Box
@@ -419,13 +430,6 @@ const Sidebar = ({ currentPage }) => {
                 </Box>
               )}
               <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                <Item
-                  title="Dashboard"
-                  to="/user/dashboard"
-                  icon={<HomeOutlinedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
                 <Typography
                   variant="h6"
                   color={colors.grey[300]}

@@ -1,28 +1,13 @@
 import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Box, Modal, Typography, useTheme } from "@mui/material";
+import { Box, Modal, Typography, useTheme, Button } from "@mui/material";
 import { useState } from "react";
 import { tokens } from "../theme";
 
-const columns = [
-  { field: "id", headerName: "Serial No.", flex: 0.5 },
-  { field: "eventId", headerName: "Event ID", flex: 1 },
-  {
-    field: "name",
-    headerName: "Event Name",
-    cellClassName: "name-column--cell",
-    flex: 1,
-  },
-  { field: "category", headerName: "Category", flex: 1 },
-  { field: "date", headerName: "Date", flex: 1 },
-  { field: "status", headerName: "Status", flex: 1 },
-  { field: "type", headerName: "Type", flex: 1 },
-  { field: "organizedBy", headerName: "Organised By", flex: 1 },
-];
-
-const EventsTable = ({ events }) => {
+const EventsTable = ({ columns, events }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   // State for modal
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
