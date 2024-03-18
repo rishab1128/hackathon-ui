@@ -17,6 +17,9 @@ import CalendarPage from "./pages/CalendarPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import PendingEventsPage from "./pages/PendingEventsPage";
 import OrganisersInfoPage from "./pages/OrganisersInfoPage";
+import UserDashboard from "./pages/UserDashboard";
+import ViewUpcomingEvents from "./pages/ViewUpcomingEvents";
+import ViewRegisteredEvents from "./pages/ViewRegisteredEvents";
 // import LandingPage2 from "./pages/LandingPage2";
 
 function App() {
@@ -42,7 +45,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          
           {getCurrentPage() !== "LandingPage" && (
             <Sidebar
               isSidebar={isSidebar}
@@ -93,6 +95,18 @@ function App() {
               <Route path="/admin/view-bar" element={<BarGraphPage />} />
               <Route path="/admin/view-pie" element={<PieChartPage />} />
               <Route path="/admin/view-line" element={<LineChartPage />} />
+
+              {/* USER */}
+              <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route path="/user/all-events" element={<ViewAllEventsPage />} />
+              <Route
+                path="/user/upcoming-events"
+                element={<ViewUpcomingEvents />}
+              />
+              <Route
+                path="/user/registered-events"
+                element={<ViewRegisteredEvents />}
+              />
             </Routes>
           </main>
         </div>
