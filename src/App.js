@@ -1,5 +1,10 @@
 import LandingPage from "./pages/LandingPage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import OrganizerDashboard from "./pages/OraganizerDashboard";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -20,6 +25,7 @@ import OrganisersInfoPage from "./pages/OrganisersInfoPage";
 import UserDashboard from "./pages/UserDashboard";
 import ViewUpcomingEvents from "./pages/ViewUpcomingEvents";
 import ViewRegisteredEvents from "./pages/ViewRegisteredEvents";
+import AdminViewAllEvents from "./pages/AdminViewAllEvents";
 // import LandingPage2 from "./pages/LandingPage2";
 
 function App() {
@@ -83,7 +89,10 @@ function App() {
 
               {/* ADMIN */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/all-events" element={<ViewAllEventsPage />} />
+              <Route
+                path="/admin/all-events"
+                element={<AdminViewAllEvents />}
+              />
               <Route
                 path="/admin/pending-events"
                 element={<PendingEventsPage />}
@@ -97,7 +106,10 @@ function App() {
               <Route path="/admin/view-line" element={<LineChartPage />} />
 
               {/* USER */}
-              <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route
+                path="/user/dashboard"
+                element={<Navigate to="/user/all-events" />}
+              />
               <Route path="/user/all-events" element={<ViewAllEventsPage />} />
               <Route
                 path="/user/upcoming-events"
