@@ -3,13 +3,13 @@ import { mockAdminAllEvents as events } from "../data/mockData";
 import Header from "../components/Header";
 import EventsTable from "../components/EventsTable";
 
-const ViewAllEventsPage = () => {
+const ViewRegisteredEvents = () => {
   return (
     <Box m="20px">
-      <Header title="EVENTS" subtitle="List of All Events" />
+      <Header title="REGISTERED EVENTS" subtitle="List of Registered Events" />
       <EventsTable events={events} />
     </Box>
   );
 };
 
-export default ViewAllEventsPage;
+export default ViewRegisteredEvents;
